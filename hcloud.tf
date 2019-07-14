@@ -16,8 +16,7 @@ resource "hcloud_server" "web" {
       "apt-get upgrade",
       "apt-get install -y snapd",
       "snap install microk8s --classic",
-      "snap alias microk8s.kubectl kubectl",
-      "microk8s.kubectl config view --raw > $HOME/.kube/config"
+      "snap alias microk8s.kubectl kubectl"
     ]
 
     connection {
