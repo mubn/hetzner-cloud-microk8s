@@ -1,7 +1,3 @@
-# Set the variable value in *.tfvars file
-# or using the -var="hcloud_token=..." CLI option
-variable "hcloud_token" {}
-
 # Configure the Hetzner Cloud Provider
 provider "hcloud" {
   token = "${var.hcloud_token}"
@@ -10,9 +6,9 @@ provider "hcloud" {
 # Create a server
 resource "hcloud_server" "web" {
   name        = "kubernetes"
-  image       = "ubuntu-18.04"
-  server_type = "cx21"
-  ssh_keys    = ["dell"]
+  image       = "${var.hcloud_image}"
+  server_type = "${var.hcloud_server_type}"
+  ssh_keys    = ["${var.hcloud_ssh_key}"]
 
   provisioner "remote-exec" {
     inline = [
@@ -28,7 +24,7 @@ resource "hcloud_server" "web" {
       host        = "${hcloud_server.web.ipv4_address}"
       type        = "ssh"
       user        = "root"
-      private_key = "${file("~/.ssh/id_rsa")}"
+      private_key = "${file("${var.hcloud_key_path}")}"
       timeout     = "3m"
     }
   }
