@@ -17,6 +17,12 @@ variable "hcloud_image" {
   default     = "ubuntu-18.04"
 }
 
+variable "hcloud_custom_image" {
+  type        = "string"
+  description = "Hetzner Cloud custom image with all dependencies installed"
+  default     = "true"
+}
+
 variable "hcloud_server_type" {
   type        = "string"
   description = "Hetzner Cloud server type"

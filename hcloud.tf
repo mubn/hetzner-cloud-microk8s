@@ -10,21 +10,23 @@ resource "hcloud_server" "web" {
   server_type = "${var.hcloud_server_type}"
   ssh_keys    = ["${var.hcloud_ssh_key}"]
 
+  connection {
+    host        = "${hcloud_server.web.ipv4_address}"
+    type        = "ssh"
+    user        = "root"
+    private_key = "${file("${var.hcloud_key_path}")}"
+    timeout     = "3m"
+  }
+
+  provisioner "file" {
+    source      = "script.sh"
+    destination = "/tmp/script.sh"
+  }
+
   provisioner "remote-exec" {
     inline = [
-      "apt-get update",
-      "apt-get upgrade",
-      "apt-get install -y snapd",
-      "snap install microk8s --classic",
-      "snap alias microk8s.kubectl kubectl"
+      "chmod +x /tmp/script.sh",
+      "/tmp/script.sh ${var.hcloud_custom_image}",
     ]
-
-    connection {
-      host        = "${hcloud_server.web.ipv4_address}"
-      type        = "ssh"
-      user        = "root"
-      private_key = "${file("${var.hcloud_key_path}")}"
-      timeout     = "3m"
-    }
   }
 }
