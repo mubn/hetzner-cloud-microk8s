@@ -1,0 +1,19 @@
+---
+- name: k8s post installation
+  hosts: all
+  tasks:
+    - name: create kube directory
+      file:
+        path: /root/.kube
+        state: directory
+        mode: 0755
+
+    - name: create kube config file
+      raw: /snap/bin/kubectl config view --raw >/root/.kube/config
+      args:
+        executable: /bin/bash
+
+    - name: fetch kubeconfig
+      fetch:
+        src: /root/.kube/config
+        dest: /tmp/kubeconfig

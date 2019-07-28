@@ -29,4 +29,8 @@ resource "hcloud_server" "web" {
       "/tmp/script.sh ${var.hcloud_custom_image}",
     ]
   }
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -u root --private-key ${var.hcloud_key_path} playbook.yml -i ${hcloud_server.web.ipv4_address},"
+  }
 }
