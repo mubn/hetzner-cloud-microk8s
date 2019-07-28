@@ -20,7 +20,7 @@ variable "hcloud_image" {
 variable "hcloud_custom_image" {
   type        = "string"
   description = "Hetzner Cloud custom image with all dependencies installed"
-  default     = "true"
+  default     = "false"
 }
 
 variable "hcloud_server_type" {
