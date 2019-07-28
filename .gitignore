@@ -2,3 +2,4 @@
 *.tfstate*
 crash.log
 *override.*
+*.retry
