@@ -8,7 +8,6 @@ variable "hcloud_token" {
 variable "hcloud_ssh_key" {
   type        = "string"
   description = "Hetzner Cloud ssh key to be used"
-  default     = "dell"
 }
 
 variable "hcloud_image" {
