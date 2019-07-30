@@ -14,6 +14,8 @@ Disable initial ssh host key checking
 export ANSIBLE_HOST_KEY_CHECKING=False
 ```
 
+The kubectl config file will be saved under `/tmp/config`.
+
 ## Delete the cluster
 
 ```
