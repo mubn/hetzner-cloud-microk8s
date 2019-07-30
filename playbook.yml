@@ -16,4 +16,5 @@
     - name: fetch kubeconfig
       fetch:
         src: /root/.kube/config
-        dest: /tmp/kubeconfig
+        dest: /tmp/
+        flat: yes
